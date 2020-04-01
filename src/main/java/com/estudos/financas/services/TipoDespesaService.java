@@ -3,10 +3,12 @@ package com.estudos.financas.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.estudos.financas.domain.TipoDespesa;
 import com.estudos.financas.repositories.TipoDespesaRepository;
 
+@Service
 public class TipoDespesaService {
 	
 	@Autowired
