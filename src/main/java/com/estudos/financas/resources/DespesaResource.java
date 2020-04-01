@@ -1,5 +1,5 @@
 package com.estudos.financas.resources;
 
-public class DespesaResources {
+public class DespesaResource {
 
 }
