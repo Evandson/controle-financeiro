@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.estudos.financas.domain.Despesa;
 import com.estudos.financas.repositories.DespesaRepository;
+import com.estudos.financas.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class DespesaService {
@@ -16,7 +17,8 @@ public class DespesaService {
 
 	public Despesa find(Integer id) {
 		Optional<Despesa> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Despesa.class.getName()));
 	}
 	
 

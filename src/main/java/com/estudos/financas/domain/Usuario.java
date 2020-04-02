@@ -19,13 +19,13 @@ public class Usuario implements Serializable {
 	private String usuario;
 	private String senha;
 	private String nome;
-	private Integer orcamento;
+	private double orcamento;
 	
 	public Usuario() {
 		
 	}
 
-	public Usuario(Integer id, String usuario, String senha, String nome, Integer orcamento) {
+	public Usuario(Integer id, String usuario, String senha, String nome, double orcamento) {
 		super();
 		this.id = id;
 		this.usuario = usuario;
@@ -66,11 +66,11 @@ public class Usuario implements Serializable {
 		this.nome = nome;
 	}
 
-	public Integer getOrcamento() {
+	public double getOrcamento() {
 		return orcamento;
 	}
 
-	public void setOrcamento(Integer orcamento) {
+	public void setOrcamento(double orcamento) {
 		this.orcamento = orcamento;
 	}
 
