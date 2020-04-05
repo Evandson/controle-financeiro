@@ -1,25 +1,32 @@
 package com.estudos.financas.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Usuario implements Serializable {
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String usuario;
 	private String senha;
 	private String nome;
 	private double orcamento;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="usuario")
+	private List<Despesa> despesas = new ArrayList<>(); 
 	
 	public Usuario() {
 		
@@ -72,6 +79,14 @@ public class Usuario implements Serializable {
 
 	public void setOrcamento(double orcamento) {
 		this.orcamento = orcamento;
+	}
+
+	public List<Despesa> getDespesas() {
+		return despesas;
+	}
+
+	public void setDespesas(List<Despesa> despesas) {
+		this.despesas = despesas;
 	}
 
 	@Override

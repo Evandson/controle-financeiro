@@ -1,22 +1,36 @@
 package com.estudos.financas.domain;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class TipoDespesa {
+public class TipoDespesa implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String tipo;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="tipoDespesa")
+	private List<Despesa> despesas = new ArrayList<>();
 	
 	public TipoDespesa () {
 		
 	}
-	
+
 	public TipoDespesa(Integer id, String tipo) {
+		super();
 		this.id = id;
 		this.tipo = tipo;
 	}
@@ -37,12 +51,12 @@ public class TipoDespesa {
 		this.tipo = tipo;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
+	public List<Despesa> getDespesas() {
+		return despesas;
+	}
+
+	public void setDespesas(List<Despesa> despesas) {
+		this.despesas = despesas;
 	}
 
 	@Override

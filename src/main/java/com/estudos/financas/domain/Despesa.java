@@ -4,29 +4,40 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Despesa implements Serializable {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private Integer valor;
+	private double valor;
 	private String descricao;
+	
+	@ManyToOne
+	@JoinColumn(name="tipo_despesa_id")
+	private TipoDespesa tipoDespesa;
+	
+	@ManyToOne
+	@JoinColumn(name="usuario_id")
+	private Usuario usuario;
 	
 	public Despesa () {
 		
 	}
 	
-	public Despesa(Integer id, Integer valor, String descricao){
+	public Despesa(Integer id, double valor, String descricao, TipoDespesa tipoDespesa, Usuario usuario) {
+		super();
 		this.id = id;
 		this.valor = valor;
 		this.descricao = descricao;
+		this.tipoDespesa = tipoDespesa;
+		this.usuario = usuario;
 	}
 
 	public Integer getId() {
@@ -37,11 +48,11 @@ public class Despesa implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getValor() {
+	public double getValor() {
 		return valor;
 	}
 
-	public void setValor(Integer valor) {
+	public void setValor(double valor) {
 		this.valor = valor;
 	}
 
@@ -51,6 +62,22 @@ public class Despesa implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public TipoDespesa getTipoDespesa() {
+		return tipoDespesa;
+	}
+
+	public void setTipoDespesa(TipoDespesa tipoDespesa) {
+		this.tipoDespesa = tipoDespesa;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	@Override
