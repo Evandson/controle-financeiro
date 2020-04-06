@@ -1,5 +1,6 @@
 package com.estudos.financas;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +41,10 @@ public class ControleFinancasApplication implements CommandLineRunner {
 		TipoDespesa tipDesp2 = new TipoDespesa(null, "Internet");
 		tipoDespesaRepository.saveAll(Arrays.asList(tipDesp1, tipDesp2));
 		
-		Despesa desp1 = new Despesa(null, 80.00, "Mensalidade Internet", tipDesp2, usu1);
-		Despesa desp2 = new Despesa(null, 250.00, "Fatura do Cartão", tipDesp1, usu1);
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		
+		Despesa desp1 = new Despesa(null, 80.00, "Mensalidade Internet", sdf.parse("05/04/2020"), tipDesp2, usu1);
+		Despesa desp2 = new Despesa(null, 250.00, "Fatura do Cartão", sdf.parse("06/04/2020"), tipDesp1, usu1);
 		despesaRepository.saveAll(Arrays.asList(desp1, desp2));
 		
 		tipDesp1.getDespesas().addAll(Arrays.asList(desp2));

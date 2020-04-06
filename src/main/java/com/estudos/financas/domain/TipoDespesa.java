@@ -19,6 +19,7 @@ public class TipoDespesa implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
 	private String tipo;
 	
 	@JsonIgnore

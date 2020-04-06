@@ -20,6 +20,11 @@ public class TipoDespesaService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + TipoDespesa.class.getName()));
 	}
+
+	public TipoDespesa insert(TipoDespesa obj) {
+		obj.setId(null);
+		return repo.save(obj);
+	}
 	
 
 }

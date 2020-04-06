@@ -1,6 +1,7 @@
 package com.estudos.financas.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class Despesa implements Serializable {
@@ -18,6 +21,9 @@ public class Despesa implements Serializable {
 	private Integer id;
 	private double valor;
 	private String descricao;
+	
+	@JsonFormat(pattern="dd/MM/yyyy")
+	private Date data;
 	
 	@ManyToOne
 	@JoinColumn(name="tipo_despesa_id")
@@ -30,12 +36,13 @@ public class Despesa implements Serializable {
 	public Despesa () {
 		
 	}
-	
-	public Despesa(Integer id, double valor, String descricao, TipoDespesa tipoDespesa, Usuario usuario) {
+
+	public Despesa(Integer id, double valor, String descricao, Date data, TipoDespesa tipoDespesa, Usuario usuario) {
 		super();
 		this.id = id;
 		this.valor = valor;
 		this.descricao = descricao;
+		this.data = data;
 		this.tipoDespesa = tipoDespesa;
 		this.usuario = usuario;
 	}
@@ -62,6 +69,14 @@ public class Despesa implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
 	}
 
 	public TipoDespesa getTipoDespesa() {
