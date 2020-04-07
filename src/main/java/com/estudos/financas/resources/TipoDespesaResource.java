@@ -22,7 +22,7 @@ public class TipoDespesaResource {
 	private TipoDespesaService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<TipoDespesa> find(@PathVariable Integer id) {
 		TipoDespesa obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
