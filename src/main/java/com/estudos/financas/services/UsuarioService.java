@@ -3,10 +3,12 @@ package com.estudos.financas.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.estudos.financas.domain.Usuario;
 import com.estudos.financas.repositories.UsuarioRepository;
+import com.estudos.financas.services.exceptions.DataIntegrityException;
 import com.estudos.financas.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -29,5 +31,15 @@ public class UsuarioService {
 	public Usuario update(Usuario obj) {
 		find(obj.getId());
 		return repo.save(obj);
+	}
+	
+	public void delete(Integer id) {
+		find(id);
+		try {
+			repo.deleteById(id);	
+		}catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possível excluir! O usuário é associado a despesas");
+		}
+		
 	}
 }

@@ -50,5 +50,4 @@ public class ControleFinancasApplication implements CommandLineRunner {
 		tipDesp1.getDespesas().addAll(Arrays.asList(desp2));
 		tipDesp2.getDespesas().addAll(Arrays.asList(desp1));
 	}
-
 }
