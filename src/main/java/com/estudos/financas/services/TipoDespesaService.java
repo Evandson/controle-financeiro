@@ -26,5 +26,8 @@ public class TipoDespesaService {
 		return repo.save(obj);
 	}
 	
-
+	public TipoDespesa update(TipoDespesa obj) {
+		find(obj.getId());
+		return repo.save(obj);
+	}
 }
