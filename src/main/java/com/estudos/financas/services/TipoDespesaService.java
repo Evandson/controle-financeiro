@@ -3,10 +3,12 @@ package com.estudos.financas.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.estudos.financas.domain.TipoDespesa;
 import com.estudos.financas.repositories.TipoDespesaRepository;
+import com.estudos.financas.services.exceptions.DataIntegrityException;
 import com.estudos.financas.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -29,5 +31,14 @@ public class TipoDespesaService {
 	public TipoDespesa update(TipoDespesa obj) {
 		find(obj.getId());
 		return repo.save(obj);
+	}
+	
+	public void delete(Integer id) {
+		find(id);
+		try {
+			repo.deleteById(id);
+		}catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possível excluir! O tipo de despesa é associado a despesa(s) de usuário(s)");
+		}
 	}
 }
