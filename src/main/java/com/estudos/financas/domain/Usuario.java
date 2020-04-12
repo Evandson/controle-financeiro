@@ -28,8 +28,7 @@ public class Usuario implements Serializable {
 	@OneToMany(mappedBy="usuario")
 	private List<Despesa> despesas = new ArrayList<>(); 
 	
-	public Usuario() {
-		
+	public Usuario() {	
 	}
 
 	public Usuario(Integer id, String usuario, String senha, String nome, double orcamento) {

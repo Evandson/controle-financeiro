@@ -1,5 +1,6 @@
 package com.estudos.financas.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,9 @@ public class TipoDespesaService {
 		}catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Não é possível excluir! O tipo de despesa é associado a despesa(s) de usuário(s)");
 		}
+	}
+
+	public List<TipoDespesa> findAll() {
+		return repo.findAll();
 	}
 }
