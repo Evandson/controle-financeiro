@@ -39,7 +39,16 @@ public class ControleFinancasApplication implements CommandLineRunner {
 		
 		TipoDespesa tipDesp1 = new TipoDespesa(null, "Cartão");
 		TipoDespesa tipDesp2 = new TipoDespesa(null, "Internet");
-		tipoDespesaRepository.saveAll(Arrays.asList(tipDesp1, tipDesp2));
+		TipoDespesa tipDesp3 = new TipoDespesa(null, "Água");
+		TipoDespesa tipDesp4 = new TipoDespesa(null, "Energia");
+		TipoDespesa tipDesp5 = new TipoDespesa(null, "Empréstimo");
+		TipoDespesa tipDesp6 = new TipoDespesa(null, "Aluguel");
+		TipoDespesa tipDesp7 = new TipoDespesa(null, "Parcela Veículo");
+		TipoDespesa tipDesp8 = new TipoDespesa(null, "Parcela Casa");
+		TipoDespesa tipDesp9 = new TipoDespesa(null, "Gasolina");
+		
+		tipoDespesaRepository.saveAll(Arrays.asList(tipDesp1, tipDesp2, tipDesp2, tipDesp3, tipDesp4, tipDesp5, 
+				tipDesp6, tipDesp7, tipDesp8, tipDesp9));
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		

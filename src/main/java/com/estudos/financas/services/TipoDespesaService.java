@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.estudos.financas.domain.TipoDespesa;
+import com.estudos.financas.dto.TipoDespesaDTO;
 import com.estudos.financas.repositories.TipoDespesaRepository;
 import com.estudos.financas.services.exceptions.DataIntegrityException;
 import com.estudos.financas.services.exceptions.ObjectNotFoundException;
@@ -45,5 +46,9 @@ public class TipoDespesaService {
 
 	public List<TipoDespesa> findAll() {
 		return repo.findAll();
+	}
+	
+	public TipoDespesa fromDTO(TipoDespesaDTO objDto) {
+		return new TipoDespesa(objDto.getId(), objDto.getTipo());
 	}
 }

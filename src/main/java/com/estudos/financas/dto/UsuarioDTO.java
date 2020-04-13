@@ -2,15 +2,28 @@ package com.estudos.financas.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.estudos.financas.domain.Usuario;
 
 public class UsuarioDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
+	
+	@NotEmpty(message="Preenchimento obrigatório!")
+	@Length(min=5, max=100, message="Deve ser inserido entre 5 e 100 caracteres!")
 	private String usuario;
+	
+	@NotEmpty(message="Preenchimento obrigatório!")
 	private String senha;
+	
+	@NotEmpty(message="Preenchimento obrigatório!")
+	@Length(min=5, max=100, message="Deve ser inserido entre 5 e 100 caracteres!")
 	private String nome;
+	
 	private double orcamento;
 	
 	public UsuarioDTO() {	

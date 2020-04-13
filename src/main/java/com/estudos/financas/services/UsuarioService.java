@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.estudos.financas.domain.Usuario;
+import com.estudos.financas.dto.UsuarioDTO;
 import com.estudos.financas.repositories.UsuarioRepository;
 import com.estudos.financas.services.exceptions.DataIntegrityException;
 import com.estudos.financas.services.exceptions.ObjectNotFoundException;
@@ -40,11 +41,14 @@ public class UsuarioService {
 			repo.deleteById(id);	
 		}catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Não é possível excluir! O usuário é associado a despesas");
-		}
-		
+		}	
 	}
 
 	public List<Usuario> findAll() {
 		return repo.findAll();
+	}
+	
+	public Usuario fromDTO(UsuarioDTO objDto) {
+		return new Usuario(objDto.getId(), objDto.getUsuario(), objDto.getSenha(), objDto.getNome(), objDto.getOrcamento());
 	}
 }
