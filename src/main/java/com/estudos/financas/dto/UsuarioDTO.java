@@ -2,6 +2,7 @@ package com.estudos.financas.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
@@ -14,7 +15,7 @@ public class UsuarioDTO implements Serializable {
 	private Integer id;
 	
 	@NotEmpty(message="Preenchimento obrigatório!")
-	@Length(min=5, max=100, message="Deve ser inserido entre 5 e 100 caracteres!")
+	@Email(message="Email inválido!")
 	private String usuario;
 	
 	@NotEmpty(message="Preenchimento obrigatório!")

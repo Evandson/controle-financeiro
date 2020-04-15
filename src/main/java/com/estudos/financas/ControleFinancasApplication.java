@@ -34,8 +34,9 @@ public class ControleFinancasApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Usuario usu1 = new Usuario(null, "teste", "123", "admin", 1234.00);
-		usuarioRepository.saveAll(Arrays.asList(usu1));	
+		Usuario usu1 = new Usuario(null, "teste1", "123", "nome1", 1234.00);
+		Usuario usu2 = new Usuario(null, "teste2", "321", "nome2", 2321.00);
+		usuarioRepository.saveAll(Arrays.asList(usu1, usu2));	
 		
 		TipoDespesa tipDesp1 = new TipoDespesa(null, "Cartão");
 		TipoDespesa tipDesp2 = new TipoDespesa(null, "Internet");
@@ -47,7 +48,7 @@ public class ControleFinancasApplication implements CommandLineRunner {
 		TipoDespesa tipDesp8 = new TipoDespesa(null, "Parcela Casa");
 		TipoDespesa tipDesp9 = new TipoDespesa(null, "Gasolina");
 		
-		tipoDespesaRepository.saveAll(Arrays.asList(tipDesp1, tipDesp2, tipDesp2, tipDesp3, tipDesp4, tipDesp5, 
+		tipoDespesaRepository.saveAll(Arrays.asList(tipDesp1, tipDesp2, tipDesp3, tipDesp4, tipDesp5, 
 				tipDesp6, tipDesp7, tipDesp8, tipDesp9));
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");

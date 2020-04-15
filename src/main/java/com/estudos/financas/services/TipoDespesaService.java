@@ -51,4 +51,5 @@ public class TipoDespesaService {
 	public TipoDespesa fromDTO(TipoDespesaDTO objDto) {
 		return new TipoDespesa(objDto.getId(), objDto.getTipo());
 	}
+	
 }
