@@ -31,10 +31,15 @@ public class TipoDespesaService {
 	}
 	
 	public TipoDespesa update(TipoDespesa obj) {
-		find(obj.getId());
+		TipoDespesa newObj = find(obj.getId());
+		updateData(newObj, obj);
 		return repo.save(obj);
 	}
 	
+	private void updateData(TipoDespesa newObj, TipoDespesa obj) {
+		newObj.setTipo(obj.getTipo());
+	}
+
 	public void delete(Integer id) {
 		find(id);
 		try {
