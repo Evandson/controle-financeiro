@@ -34,10 +34,16 @@ public class UsuarioService {
 	}
 
 	public Usuario update(Usuario obj) {
-		find(obj.getId());
-		return repo.save(obj);
+		Usuario newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
 	}
 	
+	private void updateData(Usuario newObj, Usuario obj) {
+		newObj.setNome(obj.getNome());
+		newObj.setOrcamento(obj.getOrcamento());
+	}
+
 	public void delete(Integer id) {
 		find(id);
 		try {
@@ -52,7 +58,7 @@ public class UsuarioService {
 	}
 	
 	public Usuario fromDTO(UsuarioDTO objDto) {
-		return new Usuario(objDto.getId(), objDto.getUsuario(), objDto.getSenha(), objDto.getNome(), objDto.getOrcamento());
+		return new Usuario(objDto.getId(), null, null, objDto.getNome(), objDto.getOrcamento());
 	}
 	
 	public Page<Usuario> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
