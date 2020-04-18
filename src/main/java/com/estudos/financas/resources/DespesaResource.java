@@ -21,7 +21,5 @@ public class DespesaResource {
 	public ResponseEntity<?> find(@PathVariable Integer id){
 		Despesa obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
-	}
-	
-
+	}	
 }

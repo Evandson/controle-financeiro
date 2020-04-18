@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.estudos.financas.domain.Usuario;
 import com.estudos.financas.dto.UsuarioDTO;
+import com.estudos.financas.dto.UsuarioNewDTO;
 import com.estudos.financas.repositories.UsuarioRepository;
 import com.estudos.financas.services.exceptions.DataIntegrityException;
 import com.estudos.financas.services.exceptions.ObjectNotFoundException;
@@ -40,6 +41,7 @@ public class UsuarioService {
 	}
 	
 	private void updateData(Usuario newObj, Usuario obj) {
+		newObj.setEmail(obj.getEmail());
 		newObj.setNome(obj.getNome());
 		newObj.setOrcamento(obj.getOrcamento());
 	}
@@ -58,7 +60,12 @@ public class UsuarioService {
 	}
 	
 	public Usuario fromDTO(UsuarioDTO objDto) {
-		return new Usuario(objDto.getId(), null, null, objDto.getNome(), objDto.getOrcamento());
+		return new Usuario(objDto.getId(), objDto.getEmail(), null, objDto.getNome(), objDto.getOrcamento());
+	}
+	
+	public Usuario fromDTO(UsuarioNewDTO objDto) {
+		Usuario usu = new Usuario (null, objDto.getEmail(), objDto.getSenha(), objDto.getNome(), objDto.getOrcamento());
+		return usu;
 	}
 	
 	public Page<Usuario> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {

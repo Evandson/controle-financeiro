@@ -19,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.estudos.financas.domain.Usuario;
 import com.estudos.financas.dto.UsuarioDTO;
+import com.estudos.financas.dto.UsuarioNewDTO;
 import com.estudos.financas.services.UsuarioService;
 
 @RestController
@@ -35,7 +36,7 @@ public class UsuarioResource {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert (@Valid @RequestBody UsuarioDTO objDto) {
+	public ResponseEntity<Void> insert (@Valid @RequestBody UsuarioNewDTO objDto) {
 		Usuario obj = service.fromDTO(objDto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()

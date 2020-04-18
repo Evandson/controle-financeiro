@@ -36,7 +36,8 @@ public class ControleFinancasApplication implements CommandLineRunner {
 		
 		Usuario usu1 = new Usuario(null, "teste1", "123", "nome1", 1234.00);
 		Usuario usu2 = new Usuario(null, "teste2", "321", "nome2", 2321.00);
-		usuarioRepository.saveAll(Arrays.asList(usu1, usu2));	
+		Usuario usu3 = new Usuario(null, "teste3@email.com", "098", "nome3", 2321.00);
+		usuarioRepository.saveAll(Arrays.asList(usu1, usu2, usu3));	
 		
 		TipoDespesa tipDesp1 = new TipoDespesa(null, "Cartão");
 		TipoDespesa tipDesp2 = new TipoDespesa(null, "Internet");

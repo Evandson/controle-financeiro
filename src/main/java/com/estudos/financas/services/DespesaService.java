@@ -20,6 +20,4 @@ public class DespesaService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Despesa.class.getName()));
 	}
-	
-
 }

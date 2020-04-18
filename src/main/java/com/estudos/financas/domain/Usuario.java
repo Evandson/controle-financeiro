@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +21,8 @@ public class Usuario implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String usuario;
+	@Column(unique=true)
+	private String email;
 	
 	@JsonIgnore
 	private String senha;
@@ -35,10 +37,10 @@ public class Usuario implements Serializable {
 	public Usuario() {	
 	}
 
-	public Usuario(Integer id, String usuario, String senha, String nome, double orcamento) {
+	public Usuario(Integer id, String email, String senha, String nome, double orcamento) {
 		super();
 		this.id = id;
-		this.usuario = usuario;
+		this.email = email;
 		this.senha = senha;
 		this.nome = nome;
 		this.orcamento = orcamento;
@@ -52,12 +54,12 @@ public class Usuario implements Serializable {
 		this.id = id;
 	}
 
-	public String getUsuario() {
-		return usuario;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getSenha() {
