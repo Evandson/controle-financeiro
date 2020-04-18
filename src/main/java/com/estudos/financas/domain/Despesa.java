@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -19,7 +22,11 @@ public class Despesa implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
 	private double valor;
+	
+	@NotEmpty(message="Preenchimento obrigatório!")
+	@Length(min=5, max=100, message="Deve ser inserido entre 5 e 100 caracteres!")
 	private String descricao;
 	
 	@JsonFormat(pattern="dd/MM/yyyy")
