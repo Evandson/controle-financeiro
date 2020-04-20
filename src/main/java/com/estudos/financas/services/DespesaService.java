@@ -1,6 +1,7 @@
 package com.estudos.financas.services;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,10 @@ public class DespesaService {
 		Optional<Despesa> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Despesa.class.getName()));
+	}
+	
+	public List<Despesa> findAll() {
+		return repo.findAll();
 	}
 
 	public Despesa insert(Despesa obj) {

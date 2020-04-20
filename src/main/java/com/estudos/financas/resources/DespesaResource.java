@@ -1,6 +1,8 @@
 package com.estudos.financas.resources;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.estudos.financas.domain.Despesa;
+import com.estudos.financas.dto.DespesaDTO;
 import com.estudos.financas.services.DespesaService;
 
 @RestController
@@ -29,13 +32,20 @@ public class DespesaResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity<List<DespesaDTO>> findAll() {
+		List<Despesa> list = service.findAll();
+		List<DespesaDTO> listDto = list.stream().map(obj -> new DespesaDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
+	}
+	
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody Despesa obj) {
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
-}
+	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
