@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.estudos.financas.domain.Despesa;
+import com.estudos.financas.dto.DespesaDTO;
 import com.estudos.financas.repositories.DespesaRepository;
 import com.estudos.financas.services.exceptions.ObjectNotFoundException;
 
@@ -33,8 +34,26 @@ public class DespesaService {
 		return repo.save(obj);
 	}
 	
+	public Despesa update(Despesa obj) {
+		Despesa newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
+		
+	}
+	
+	private void updateData(Despesa newObj, Despesa obj) {
+		newObj.setValor(obj.getValor());
+		newObj.setDescricao(obj.getDescricao());
+		newObj.setTipoDespesa(obj.getTipoDespesa());
+	}
+
 	public void delete(Integer id) {
 		find(id);
 		repo.deleteById(id);	
 }
+
+	public Despesa fromDTO(DespesaDTO objDto) {
+		Despesa des = new Despesa (null, objDto.getValor(), objDto.getDescricao(), null, objDto.getTipoDespesa(), null);
+		return des; 
 	}
+}
