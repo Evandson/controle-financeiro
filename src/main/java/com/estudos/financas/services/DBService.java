@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.estudos.financas.domain.Despesa;
@@ -26,11 +27,14 @@ public class DBService {
 	@Autowired
 	private DespesaRepository despesaRepository;
 	
+	@Autowired
+	private BCryptPasswordEncoder enc;
+	
 	public void instantiateTestDatabase() throws ParseException {
 		
-		Usuario usu1 = new Usuario(null, "teste1", "123", "nome1", 1234.00);
-		Usuario usu2 = new Usuario(null, "teste2", "321", "nome2", 2321.00);
-		Usuario usu3 = new Usuario(null, "teste3@email.com", "098", "nome3", 2321.00);
+		Usuario usu1 = new Usuario(null, "teste1", enc.encode("123"), "nome1", 1234.00);
+		Usuario usu2 = new Usuario(null, "teste2", enc.encode("321"), "nome2", 2321.00);
+		Usuario usu3 = new Usuario(null, "teste3@email.com", enc.encode("098"), "nome3", 2321.00);
 		usuarioRepository.saveAll(Arrays.asList(usu1, usu2, usu3));	
 		
 		TipoDespesa tipDesp1 = new TipoDespesa(null, "Cartão");

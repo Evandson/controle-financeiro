@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.estudos.financas.domain.Usuario;
@@ -22,6 +23,9 @@ public class UsuarioService {
 	
 	@Autowired
 	private UsuarioRepository repo;
+	
+	@Autowired
+	private BCryptPasswordEncoder enc;
 
 	public Usuario find(Integer id) {
 		Optional<Usuario> obj = repo.findById(id);
@@ -64,7 +68,7 @@ public class UsuarioService {
 	}
 	
 	public Usuario fromDTO(UsuarioNewDTO objDto) {
-		Usuario usu = new Usuario (null, objDto.getEmail(), objDto.getSenha(), objDto.getNome(), objDto.getOrcamento());
+		Usuario usu = new Usuario (null, objDto.getEmail(), enc.encode(objDto.getSenha()), objDto.getNome(), objDto.getOrcamento());
 		return usu;
 	}
 	
