@@ -12,9 +12,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.estudos.financas.domain.Usuario;
+import com.estudos.financas.domain.enums.Perfil;
 import com.estudos.financas.dto.UsuarioDTO;
 import com.estudos.financas.dto.UsuarioNewDTO;
 import com.estudos.financas.repositories.UsuarioRepository;
+import com.estudos.financas.security.UserSS;
+import com.estudos.financas.services.exceptions.AuthorizationException;
 import com.estudos.financas.services.exceptions.DataIntegrityException;
 import com.estudos.financas.services.exceptions.ObjectNotFoundException;
 
@@ -28,6 +31,12 @@ public class UsuarioService {
 	private BCryptPasswordEncoder enc;
 
 	public Usuario find(Integer id) {
+		
+		UserSS user = UserService.authenticated();
+		if (user==null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
 		Optional<Usuario> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Usuario.class.getName()));

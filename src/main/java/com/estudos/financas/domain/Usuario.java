@@ -2,15 +2,22 @@ package com.estudos.financas.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.estudos.financas.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -30,11 +37,16 @@ public class Usuario implements Serializable {
 	private String nome;
 	private double orcamento;
 	
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name="PERFIS")
+	private Set<Integer> perfis = new HashSet<>();
+	
 	@JsonIgnore
 	@OneToMany(mappedBy="usuario")
 	private List<Despesa> despesas = new ArrayList<>(); 
 	
 	public Usuario() {	
+		addPerfil(Perfil.USUARIO);
 	}
 
 	public Usuario(Integer id, String email, String senha, String nome, double orcamento) {
@@ -44,6 +56,7 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 		this.nome = nome;
 		this.orcamento = orcamento;
+		addPerfil(Perfil.USUARIO);
 	}
 
 	public Integer getId() {
@@ -84,6 +97,14 @@ public class Usuario implements Serializable {
 
 	public void setOrcamento(double orcamento) {
 		this.orcamento = orcamento;
+	}
+	
+	public Set<Perfil> getPerfis() {
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
+	}
+
+	public void addPerfil(Perfil perfil) {
+		perfis.add(perfil.getCod());
 	}
 
 	public List<Despesa> getDespesas() {

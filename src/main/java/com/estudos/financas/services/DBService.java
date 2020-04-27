@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.estudos.financas.domain.Despesa;
 import com.estudos.financas.domain.TipoDespesa;
 import com.estudos.financas.domain.Usuario;
+import com.estudos.financas.domain.enums.Perfil;
 import com.estudos.financas.repositories.DespesaRepository;
 import com.estudos.financas.repositories.TipoDespesaRepository;
 import com.estudos.financas.repositories.UsuarioRepository;
@@ -32,9 +33,10 @@ public class DBService {
 	
 	public void instantiateTestDatabase() throws ParseException {
 		
-		Usuario usu1 = new Usuario(null, "teste1", enc.encode("123"), "nome1", 1234.00);
-		Usuario usu2 = new Usuario(null, "teste2", enc.encode("321"), "nome2", 2321.00);
+		Usuario usu1 = new Usuario(null, "teste1@email.com", enc.encode("123"), "nome1", 1234.00);
+		Usuario usu2 = new Usuario(null, "teste2@email.com", enc.encode("321"), "nome2", 2321.00);
 		Usuario usu3 = new Usuario(null, "teste3@email.com", enc.encode("098"), "nome3", 2321.00);
+		usu3.addPerfil(Perfil.ADMIN);
 		usuarioRepository.saveAll(Arrays.asList(usu1, usu2, usu3));	
 		
 		TipoDespesa tipDesp1 = new TipoDespesa(null, "Cartão");

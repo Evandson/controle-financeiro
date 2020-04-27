@@ -5,11 +5,17 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.estudos.financas.domain.Despesa;
+import com.estudos.financas.domain.Usuario;
 import com.estudos.financas.dto.DespesaDTO;
 import com.estudos.financas.repositories.DespesaRepository;
+import com.estudos.financas.security.UserSS;
+import com.estudos.financas.services.exceptions.AuthorizationException;
 import com.estudos.financas.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -17,6 +23,9 @@ public class DespesaService {
 	
 	@Autowired
 	private DespesaRepository repo;
+	
+	@Autowired
+	private UsuarioService usuarioService;
 
 	public Despesa find(Integer id) {
 		Optional<Despesa> obj = repo.findById(id);
@@ -55,5 +64,15 @@ public class DespesaService {
 	public Despesa fromDTO(DespesaDTO objDto) {
 		Despesa des = new Despesa (null, objDto.getValor(), objDto.getDescricao(), null, objDto.getTipoDespesa(), null);
 		return des; 
+	}
+	
+	public Page<Despesa> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+		UserSS user = UserService.authenticated();
+		if (user == null) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		Usuario usuario =  usuarioService.find(user.getId());
+		return repo.findByUsuario(usuario, pageRequest);
 	}
 }
