@@ -139,4 +139,14 @@ public class Usuario implements Serializable {
 			return false;
 		return true;
 	}
+	
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Olá, ");
+		builder.append(getNome() + ". ");
+		builder.append("\nUsuário: ");
+		builder.append(getEmail());
+		builder.append("\nCadastro realizado com sucesso ! ");
+		return builder.toString();
+	}
 }
