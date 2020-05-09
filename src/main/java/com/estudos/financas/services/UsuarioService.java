@@ -25,6 +25,9 @@ import com.estudos.financas.services.exceptions.ObjectNotFoundException;
 public class UsuarioService {
 	
 	@Autowired
+	private EmailService emailService;
+	
+	@Autowired
 	private UsuarioRepository repo;
 	
 	@Autowired
@@ -58,7 +61,7 @@ public class UsuarioService {
 	
 	public Usuario insert(Usuario obj) {
 		obj.setId(null);
-		System.out.println(obj);
+		emailService.sendOrderConfirmationEmail(obj);
 		return repo.save(obj);
 	}
 
