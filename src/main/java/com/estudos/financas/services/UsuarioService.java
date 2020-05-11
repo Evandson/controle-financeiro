@@ -61,7 +61,7 @@ public class UsuarioService {
 	
 	public Usuario insert(Usuario obj) {
 		obj.setId(null);
-		emailService.sendOrderConfirmationEmail(obj);
+		emailService.sendOrderConfirmationHtmlEmail(obj);
 		return repo.save(obj);
 	}
 

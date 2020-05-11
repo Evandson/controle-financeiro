@@ -24,6 +24,7 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-starter-security")
 	compile 'io.jsonwebtoken:jjwt:0.9.0'
 	compile("org.springframework.boot:spring-boot-starter-mail")
+	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
 }
 
 test {
