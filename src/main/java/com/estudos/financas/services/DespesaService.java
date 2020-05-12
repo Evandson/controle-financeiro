@@ -75,4 +75,13 @@ public class DespesaService {
 		Usuario usuario =  usuarioService.find(user.getId());
 		return repo.findByUsuario(usuario, pageRequest);
 	}
+	
+	public Double findSum() {
+		UserSS user = UserService.authenticated();
+		if (user == null) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		Usuario usuario =  usuarioService.find(user.getId());
+		return repo.somaDespesas(usuario);
 }
+	}

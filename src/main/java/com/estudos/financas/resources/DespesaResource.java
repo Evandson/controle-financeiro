@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.estudos.financas.domain.Despesa;
+import com.estudos.financas.domain.Usuario;
 import com.estudos.financas.dto.DespesaDTO;
+import com.estudos.financas.repositories.DespesaRepository;
 import com.estudos.financas.services.DespesaService;
 
 @RestController
@@ -27,6 +29,9 @@ public class DespesaResource {
 	
 	@Autowired
 	private DespesaService service;
+	
+	@Autowired
+	private DespesaRepository repo;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id){
@@ -71,5 +76,10 @@ public class DespesaResource {
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(value="/total", method=RequestMethod.GET)
+	public Double findSum() { 
+		return service.findSum();
 	}
 }

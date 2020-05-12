@@ -56,7 +56,9 @@ public class DBService {
 		
 		Despesa desp1 = new Despesa(null, 80.00, "Mensalidade Internet", sdf.parse("05/04/2020"), tipDesp2, usu1);
 		Despesa desp2 = new Despesa(null, 250.00, "Fatura do Cartão", sdf.parse("06/04/2020"), tipDesp1, usu1);
-		despesaRepository.saveAll(Arrays.asList(desp1, desp2));
+		Despesa desp3 = new Despesa(null, 130.00, "Fatura do Cartão", sdf.parse("07/04/2020"), tipDesp1, usu2);
+		Despesa desp4 = new Despesa(null, 150.00, "Conta de Energia", sdf.parse("07/04/2020"), tipDesp4, usu2);
+		despesaRepository.saveAll(Arrays.asList(desp1, desp2, desp3, desp4));
 		
 		tipDesp1.getDespesas().addAll(Arrays.asList(desp2));
 		tipDesp2.getDespesas().addAll(Arrays.asList(desp1));
