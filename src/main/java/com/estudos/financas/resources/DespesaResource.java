@@ -47,12 +47,8 @@ public class DespesaResource {
 	}*/
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<Page<Despesa>> findPage(
-			@RequestParam(value="page", defaultValue="0") Integer page, 
-			@RequestParam(value="linesPerPage", defaultValue="24") Integer linesPerPage, 
-			@RequestParam(value="orderBy", defaultValue="data") String orderBy, 
-			@RequestParam(value="direction", defaultValue="DESC") String direction) {
-		Page<Despesa> list = service.findPage(page, linesPerPage, orderBy, direction);
+	public ResponseEntity<List<Despesa>> findAll() {
+		List<Despesa> list = service.findPage();
 		return ResponseEntity.ok().body(list);
 	}
 	

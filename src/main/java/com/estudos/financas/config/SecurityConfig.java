@@ -15,9 +15,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 import com.estudos.financas.security.JWTAuthenticationFilter;
 import com.estudos.financas.security.JWTAuthorizationFilter;
@@ -58,6 +60,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
+		CharacterEncodingFilter filter = new CharacterEncodingFilter(); 
+		filter.setEncoding("UTF-8"); 
+		filter.setForceEncoding(true); 
+		http.addFilterBefore(filter, CsrfFilter.class);
 	}
 
 	@Override

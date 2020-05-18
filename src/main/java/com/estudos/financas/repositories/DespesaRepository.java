@@ -1,7 +1,7 @@
 package com.estudos.financas.repositories;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -14,7 +14,7 @@ import com.estudos.financas.domain.Usuario;
 public interface DespesaRepository extends JpaRepository<Despesa, Integer> {
 	
 	@Transactional(readOnly=true)
-	Page<Despesa> findByUsuario(Usuario usuario, Pageable pageRequest);
+	List<Despesa> findByUsuario(Usuario usuario);
 	
 	@Query("SELECT SUM(m.valor) FROM Despesa m WHERE m.usuario = ?1")
 	Double somaDespesas(Usuario usuario);

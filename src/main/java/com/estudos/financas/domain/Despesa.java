@@ -14,6 +14,7 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Despesa implements Serializable {
@@ -38,6 +39,7 @@ public class Despesa implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="usuario_id")
+	@JsonIgnore
 	private Usuario usuario;
 	
 	public Despesa () {

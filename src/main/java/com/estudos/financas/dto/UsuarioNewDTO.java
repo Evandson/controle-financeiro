@@ -15,6 +15,7 @@ public class UsuarioNewDTO {
 	private String email;
 	
 	@NotEmpty(message="Preenchimento obrigatório!")
+	@Length(min=8, message="Deve ser inserido no mínimo 8 caracteres!")
 	private String senha;
 	
 	@NotEmpty(message="Preenchimento obrigatório!")

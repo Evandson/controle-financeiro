@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.estudos.financas.domain.Despesa;
@@ -66,14 +63,13 @@ public class DespesaService {
 		return des; 
 	}
 	
-	public Page<Despesa> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+	public List<Despesa> findPage() {
 		UserSS user = UserService.authenticated();
 		if (user == null) {
 			throw new AuthorizationException("Acesso negado");
 		}
-		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		Usuario usuario =  usuarioService.find(user.getId());
-		return repo.findByUsuario(usuario, pageRequest);
+		return repo.findByUsuario(usuario);
 	}
 	
 	public Double findSum() {
