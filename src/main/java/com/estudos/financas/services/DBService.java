@@ -58,10 +58,25 @@ public class DBService {
 		Despesa desp2 = new Despesa(null, 250.00, "Fatura do Cartão", sdf.parse("06/04/2020"), tipDesp1, usu1);
 		Despesa desp3 = new Despesa(null, 130.00, "Fatura do Cartão", sdf.parse("07/04/2020"), tipDesp1, usu2);
 		Despesa desp4 = new Despesa(null, 150.00, "Conta de Energia", sdf.parse("07/04/2020"), tipDesp4, usu2);
-		despesaRepository.saveAll(Arrays.asList(desp1, desp2, desp3, desp4));
+		Despesa desp5 = new Despesa(null, 45.90, "Mensalidade Netflix", sdf.parse("05/04/2020"), tipDesp1, usu1);
+		Despesa desp6 = new Despesa(null, 350.00, "Conta Energia", sdf.parse("06/04/2020"), tipDesp4, usu1);
+		Despesa desp7 = new Despesa(null, 80.00, "Abastecimento Veículo", sdf.parse("05/04/2020"), tipDesp1, usu1);
+		Despesa desp8 = new Despesa(null, 800.00, "Parcela Carro", sdf.parse("06/04/2020"), tipDesp7, usu1);
+		Despesa desp9 = new Despesa(null, 80.00, "Boleto Empréstimo", sdf.parse("05/04/2020"), tipDesp2, usu1);
+		Despesa desp10 = new Despesa(null, 250.00, "Fatura do Cartão II", sdf.parse("06/04/2020"), tipDesp1, usu1);
+	
+		despesaRepository.saveAll(Arrays.asList(desp1, desp2, desp3, desp4, desp5, desp6, desp7, desp8, desp9, desp10));
 		
 		tipDesp1.getDespesas().addAll(Arrays.asList(desp2));
 		tipDesp2.getDespesas().addAll(Arrays.asList(desp1));
+		tipDesp1.getDespesas().addAll(Arrays.asList(desp3));
+		tipDesp4.getDespesas().addAll(Arrays.asList(desp4));
+		tipDesp1.getDespesas().addAll(Arrays.asList(desp5));
+		tipDesp4.getDespesas().addAll(Arrays.asList(desp6));
+		tipDesp4.getDespesas().addAll(Arrays.asList(desp7));
+		tipDesp7.getDespesas().addAll(Arrays.asList(desp8));
+		tipDesp2.getDespesas().addAll(Arrays.asList(desp9));
+		tipDesp1.getDespesas().addAll(Arrays.asList(desp10));
 		
 	}
 }

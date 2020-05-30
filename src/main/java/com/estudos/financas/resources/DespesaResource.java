@@ -75,7 +75,8 @@ public class DespesaResource {
 	}
 	
 	@RequestMapping(value="/total", method=RequestMethod.GET)
-	public Double findSum() { 
-		return service.findSum();
+	public ResponseEntity<Double> findSum() {
+		Double list = service.findSum();
+		return ResponseEntity.ok().body(list);
 	}
 }
